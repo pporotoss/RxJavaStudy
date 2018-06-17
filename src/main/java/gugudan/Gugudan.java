@@ -11,8 +11,11 @@ public class Gugudan {
         System.out.println("Gugudan Input:");
         final int dan = Integer.parseInt(scanner.nextLine());
     
-        Observable<Integer> just = Observable.just(dan);
-        Observable<String> source = just.flatMap(num -> Observable.range(1, 9).map(row -> num + " * " + row + " = " + (num * row)));
+        Observable<String> source = Observable.just(dan)
+                                            .flatMap(num ->
+                                                    Observable.range(1, 9)
+                                                                .map(row -> num + " * " + row + " = " + (num * row))
+                                            );
         source.subscribe(System.out::println);
     }
     
