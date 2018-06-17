@@ -12,10 +12,10 @@ public class Gugudan {
         final int dan = Integer.parseInt(scanner.nextLine());
     
         Observable<String> source = Observable.just(dan)
-                                            .flatMap(num ->
-                                                    Observable.range(1, 9)
-                                                                .map(row -> num + " * " + row + " = " + (num * row))
-                                            );
+                .flatMap(
+                        num -> Observable.range(1, 9)
+                        , (num, row) -> num + " * " + row + " = " + (num * row)
+                );
         source.subscribe(System.out::println);
     }
     
