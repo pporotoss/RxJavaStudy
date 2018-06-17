@@ -1,6 +1,7 @@
 package gugudan;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Function;
 
 import java.util.Scanner;
 
@@ -11,8 +12,13 @@ public class Gugudan {
         System.out.println("Gugudan Input:");
         final int dan = Integer.parseInt(scanner.nextLine());
     
-        Observable<Integer> source = Observable.range(1, 9);
-        source.subscribe(row -> System.out.println(dan + " * " + row + " = " + (dan*row)));
+        Function<Integer, Observable<String>> gugudan = num -> {
+            Observable<String> observable = Observable.range(1, 9).map(row -> dan + " * " + row + " = " + (dan * row));
+            return observable;
+        };
+        
+        Observable<String> source = Observable.just(dan).flatMap(gugudan);
+        source.subscribe(System.out::println);
     }
     
 }
