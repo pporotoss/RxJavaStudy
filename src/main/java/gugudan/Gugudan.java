@@ -10,7 +10,9 @@ public class Gugudan {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Gugudan Input:");
         final int dan = Integer.parseInt(scanner.nextLine());
-    
+        
+        // map() 과 flatMap() 의 가장 큰 차이는 Observable로 리턴 여부 이다.
+        // flatMap()은 Observable을 리턴한다.
         Observable<String> source = Observable.just(dan)
                 .flatMap(
                         num -> Observable.range(1, 9)
